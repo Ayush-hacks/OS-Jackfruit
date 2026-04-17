@@ -302,7 +302,8 @@ static int __init monitor_init(void)
 /* ------------------------------------------------------------------ */
 static void __exit monitor_exit(void)
 {
-    del_timer_sync(&monitor_timer);
+     if (timer_pending(&monitor_timer))
+        del_timer(&monitor_timer);
 
     /* TODO 6: free all remaining entries */
     {
